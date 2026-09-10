@@ -22,6 +22,7 @@
   --accent-strong: #7ce8d8;
   --accent-soft: rgba(79, 216, 196, 0.12);
   --amber: #f0a94e;
+  --nav-bg: rgba(10, 14, 22, 0.82);
 
   /* Type */
   --font-display: "Space Grotesk", "Segoe UI", sans-serif;
@@ -34,6 +35,39 @@
   --edge: 24px;
   --radius: 3px;
   --radius-lg: 5px;
+}
+
+/* Light theme — same "Flight Systems" identity, daytime instead of night sky.
+   Applied via [data-theme="light"] on <html>, toggled + persisted in
+   localStorage by script.js. Every color in the page is driven by these
+   custom properties, so the whole site re-themes from this one block. */
+:root[data-theme="light"] {
+  --bg: #eef1f6;
+  --bg-alt: #e4e9f1;
+  --line: rgba(10, 20, 35, 0.09);
+  --line-strong: rgba(10, 20, 35, 0.18);
+  --fg: #10151f;
+  --fg-dim: #4a5568;
+  --fg-faint: #7c869a;
+  --accent: #0e9c88;
+  --accent-strong: #0b7c6c;
+  --accent-soft: rgba(14, 156, 136, 0.12);
+  --nav-bg: rgba(238, 241, 246, 0.85);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #eef1f6;
+    --bg-alt: #e4e9f1;
+    --line: rgba(10, 20, 35, 0.09);
+    --line-strong: rgba(10, 20, 35, 0.18);
+    --fg: #10151f;
+    --fg-dim: #4a5568;
+    --fg-faint: #7c869a;
+    --accent: #0e9c88;
+    --accent-strong: #0b7c6c;
+    --accent-soft: rgba(14, 156, 136, 0.12);
+    --nav-bg: rgba(238, 241, 246, 0.85);
+  }
 }
 
 /* ---------- Reset ---------- */
@@ -174,7 +208,7 @@ body {
   transition: border-color 0.3s ease, background-color 0.3s ease;
 }
 .nav.scrolled {
-  background: rgba(10, 14, 22, 0.82);
+  background: var(--nav-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom-color: var(--line);
@@ -196,16 +230,11 @@ body {
   font-size: 14px;
   color: var(--fg);
 }
-.nav-mark .box {
-  width: 28px;
-  height: 28px;
-  border: 1px solid var(--line-strong);
-  border-radius: var(--radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+.nav-mark .mark-glyph {
+  width: 22px;
+  height: 22px;
   color: var(--accent);
+  flex-shrink: 0;
 }
 .nav-links {
   display: flex;
@@ -240,6 +269,11 @@ body {
   font-size: 12px;
   color: var(--fg-dim);
 }
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
 .pulse-dot {
   width: 7px;
   height: 7px;
@@ -266,6 +300,52 @@ body {
     opacity: 0;
   }
 }
+.theme-toggle {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg-dim);
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+}
+.theme-toggle svg {
+  width: 17px;
+  height: 17px;
+  position: absolute;
+  transition: opacity 0.2s ease, transform 0.3s ease;
+}
+.theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(-40deg) scale(0.7);
+}
+:root[data-theme="light"] .theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(40deg) scale(0.7);
+}
+:root[data-theme="light"] .theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-toggle .icon-sun {
+    opacity: 0;
+    transform: rotate(40deg) scale(0.7);
+  }
+  :root:not([data-theme="dark"]) .theme-toggle .icon-moon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+}
+
 .nav-toggle {
   display: none;
   width: 36px;
@@ -629,7 +709,8 @@ body {
   padding: 28px;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.25s ease, transform 0.15s ease-out;
+  transition: background-color 0.25s ease, transform 0.15s ease-out,
+    opacity 0.6s ease;
 }
 .proj:hover {
   background: var(--bg-alt);
@@ -1067,6 +1148,39 @@ body.has-cursor .cursor-dot {
 /* ---------- Magnetic buttons ---------- */
 .btn {
   will-change: transform;
+}
+
+/* ---------- Subtle scroll reveal (below-the-fold content) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Project cards already own a `transition` (hover tilt + spotlight), so their
+   reveal state is a separate modifier with no transition of its own — it
+   rides on .proj's transition instead of overwriting it. */
+.proj.reveal-init {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.proj.reveal-init.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ---------- Featured project card ---------- */
+.proj.featured {
+  grid-column: 1 / -1;
+}
+.proj.featured h3 {
+  font-size: 20px;
+}
+.proj.featured p {
+  max-width: 68ch;
 }
 
 @media (prefers-reduced-motion: reduce) {

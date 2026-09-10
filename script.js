@@ -269,6 +269,82 @@ document.querySelectorAll(".proj").forEach((card) => {
   });
 });
 
+/* ---------- Theme toggle (persisted) ---------- */
+const THEME_KEY = "ak-theme";
+const rootEl = document.documentElement;
+
+function applyTheme(theme) {
+  if (theme === "light" || theme === "dark") {
+    rootEl.setAttribute("data-theme", theme);
+  } else {
+    rootEl.removeAttribute("data-theme");
+  }
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) {
+    const isLight =
+      theme === "light" ||
+      (!theme && window.matchMedia("(prefers-color-scheme: light)").matches);
+    meta.setAttribute("content", isLight ? "#eef1f6" : "#0a0e16");
+  }
+}
+
+let savedTheme = null;
+try {
+  savedTheme = localStorage.getItem(THEME_KEY);
+} catch (e) {
+  /* storage unavailable (private mode etc.) — fall back to system theme */
+}
+applyTheme(savedTheme);
+
+const themeToggle = document.getElementById("themeToggle");
+if (themeToggle) {
+  themeToggle.addEventListener("click", () => {
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const current = rootEl.getAttribute("data-theme") || (prefersDark ? "dark" : "light");
+    const next = current === "dark" ? "light" : "dark";
+    applyTheme(next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (e) {
+      /* ignore */
+    }
+  });
+}
+
+/* ---------- Subtle scroll reveal ---------- */
+const revealSelector =
+  "#experience .section-head, #experience .xp, " +
+  "#work .section-head, #work .proj, " +
+  "#skills .section-head, #skills .skill-group, " +
+  "#education .section-head, #education .edu-row, " +
+  "#contact .section-kicker, #contact h2, #contact .contact-lede";
+const revealEls = Array.from(document.querySelectorAll(revealSelector));
+
+const parentCounters = new Map();
+revealEls.forEach((el) => {
+  el.classList.add(el.classList.contains("proj") ? "reveal-init" : "reveal");
+  const idx = parentCounters.get(el.parentElement) || 0;
+  parentCounters.set(el.parentElement, idx + 1);
+  el.style.transitionDelay = Math.min(idx, 5) * 70 + "ms";
+});
+
+if ("IntersectionObserver" in window) {
+  const revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+  );
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add("in"));
+}
+
 /* ---------- Magnetic buttons ---------- */
 if (!reduceMotion && finePointer) {
   document.querySelectorAll(".btn").forEach((btn) => {

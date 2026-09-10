@@ -12,7 +12,7 @@
 <meta property="og:description" content="Senior .NET Developer specializing in system design and distributed architecture." />
 <meta property="og:type" content="website" />
 
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e16'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='14' fill='%234fd8c4' text-anchor='middle'%3EAK%3C/text%3E%3C/svg%3E" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a0e16'/%3E%3Ccircle cx='16' cy='16' r='10' fill='none' stroke='%234fd8c4' stroke-width='1.8'/%3E%3Cpath d='M16 16 L16 6 A10 10 0 0 1 22.6 8.4 Z' fill='%234fd8c4'/%3E%3Ccircle cx='16' cy='16' r='1.6' fill='%234fd8c4'/%3E%3C/svg%3E" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -38,7 +38,14 @@
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
-    <a href="#top" class="nav-mark"><span class="box">AK</span> Aref Kanaanpour</a>
+    <a href="#top" class="nav-mark">
+      <svg class="mark-glyph" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1.8" />
+        <path d="M16 16 L16 6 A10 10 0 0 1 22.6 8.4 Z" fill="currentColor" />
+        <circle cx="16" cy="16" r="1.6" fill="currentColor" />
+      </svg>
+      Aref Kanaanpour
+    </a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#about" data-nav>About</a></li>
       <li><a href="#experience" data-nav>Experience</a></li>
@@ -46,12 +53,18 @@
       <li><a href="#skills" data-nav>Skills</a></li>
       <li><a href="#contact" data-nav>Contact</a></li>
     </ul>
-    <div class="nav-status">
-      <span class="pulse-dot"></span> Open to opportunities
+    <div class="nav-right">
+      <div class="nav-status">
+        <span class="pulse-dot"></span> Open to opportunities
+      </div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a6.8 6.8 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+      </button>
     </div>
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-    </button>
   </div>
   <div class="nav-mobile" id="navMobile">
     <a href="#about">About</a>
@@ -100,7 +113,7 @@
         </div>
 
         <div class="hero-stats load-in" style="animation-delay:.34s">
-          <div class="stat"><span class="n" data-target="5" data-suffix="+">5+</span><span>Years in software engineering</span></div>
+          <div class="stat"><span class="n" data-target="8" data-suffix="+">8+</span><span>Years in software engineering</span></div>
           <div class="stat"><span class="n" data-target="4" data-suffix="">4</span><span>Years building aviation systems</span></div>
           <div class="stat"><span class="n" data-target="9" data-suffix="+">9+</span><span>Public repositories</span></div>
         </div>
@@ -180,17 +193,20 @@
         <h3>Senior .NET Developer</h3>
         <div class="co"><!-- TODO: add real company name if you'd like it public -->Commercial Airline Company</div>
         <p class="desc">
-          Own system design and end-to-end technical delivery for core aircraft maintenance and logistics
-          systems — translating operational requirements from engineering and ops teams into scalable .NET
-          services, and staying responsible for how those solutions perform once they're in production.
+          Sit in on business meetings across the organization to understand where operations are heading,
+          then take those conversations and work out the requirements myself before handing engineering a
+          clear technical brief — acting as the bridge between what the business needs and what the team
+          builds. Alongside that, I own system design and end-to-end technical delivery for core aircraft
+          maintenance and logistics systems, from architecture decisions down to the services running in
+          production.
         </p>
         <div class="xp-tags">
           <span class="tag-chip">System Design</span>
+          <span class="tag-chip">Business Analysis</span>
           <span class="tag-chip">.NET</span>
-          <span class="tag-chip">C#</span>
           <span class="tag-chip">Microservices</span>
+          <span class="tag-chip">Technical Leadership</span>
           <span class="tag-chip">SQL Server</span>
-          <span class="tag-chip">Architecture</span>
         </div>
       </article>
 
@@ -277,6 +293,24 @@
     </div>
 
     <div class="proj-grid">
+
+      <div class="proj featured">
+        <div class="proj-top">
+          <h3>Finex</h3>
+          <span class="yr">Open Source · Featured</span>
+        </div>
+        <p>A Telegram bot and Mini App for tracking income, expenses and installments on the Persian
+          (Shamsi) calendar. Log a transaction from a chat message, an iOS Shortcut, or the dashboard, and
+          get a reminder the day before each installment is due — plus a live forecast of what your balance
+          looks like once this month's installments are paid. Runs entirely on Cloudflare Workers, with a
+          reminder cron built to stay well within the free tier as the user base grows.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">Cloudflare Workers · Telegram Bot API · Workers KV</span>
+          <a href="https://github.com/Akanaanpoor/Finex" target="_blank" rel="noopener" class="proj-link">
+            GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
 
       <div class="proj">
         <div class="proj-top">
@@ -388,7 +422,8 @@
         <div class="label">Frameworks &amp; Libraries</div>
         <div class="skill-chips">
           <span>ASP.NET Core</span><span>EF Core</span><span>Dapper</span><span>MediatR</span>
-          <span>SignalR</span><span>Hangfire</span><span>AutoMapper</span><span>Blazor</span><span>jQuery</span>
+          <span>SignalR</span><span>Hangfire</span><span>AutoMapper</span><span>FluentValidation</span>
+          <span>Polly</span><span>Serilog</span><span>Blazor</span><span>jQuery</span>
         </div>
       </div>
 
@@ -397,7 +432,8 @@
         <div class="skill-chips">
           <span>Domain-Driven Design</span><span>CQRS</span><span>Microservices</span>
           <span>Onion Architecture</span><span>Clean Architecture</span><span>Vertical Slice Architecture</span>
-          <span>SOLID</span><span>Design Patterns</span><span>System Design</span>
+          <span>Event-Driven Architecture</span><span>API Gateway</span><span>SOLID</span>
+          <span>Design Patterns</span><span>System Design</span>
         </div>
       </div>
 
@@ -411,7 +447,8 @@
       <div class="skill-group">
         <div class="label">Engineering Practices</div>
         <div class="skill-chips">
-          <span>Unit &amp; Integration Testing</span><span>CI/CD</span><span>Dependency Injection</span>
+          <span>Unit &amp; Integration Testing</span><span>Architecture Testing</span><span>CI/CD</span>
+          <span>Dependency Injection</span><span>Resilience &amp; Retry Policies</span>
           <span>Structured Logging</span><span>Observability</span><span>REST API Design</span>
         </div>
       </div>
@@ -419,7 +456,8 @@
       <div class="skill-group">
         <div class="label">Tools &amp; Platforms</div>
         <div class="skill-chips">
-          <span>Docker</span><span>Git</span><span>Cloudflare Workers</span>
+          <span>Docker</span><span>Git</span><span>GitHub Actions</span><span>Cloudflare Workers</span>
+          <span>Swagger / OpenAPI</span><span>Postman</span>
         </div>
       </div>
     </div>
@@ -439,7 +477,7 @@
     <div class="edu-row">
       <div>
         <h3>B.Sc. in Computer Engineering</h3>
-        <div class="deg">Software Engineering<!-- TODO: add university name and years --></div>
+        <div class="deg">Software Engineering · Islamic Azad University, Karaj Branch</div>
       </div>
     </div>
   </div>
