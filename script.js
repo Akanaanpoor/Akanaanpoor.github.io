@@ -182,6 +182,9 @@ if (flapWord) {
     "MICROSERVICES",
     "CQRS + DDD",
     "ASP.NET CORE",
+    "CLEAN ARCHITECTURE",
+    "Performance & Reliability",
+    "Refactoring Techniques",
   ];
   if (!reduceMotion) {
     let i = 0;
