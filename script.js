@@ -54,3 +54,233 @@ if ("IntersectionObserver" in window && sections.length) {
   );
   sections.forEach((section) => observer.observe(section));
 }
+
+/* =========================================================
+   Signature interactions
+   ========================================================= */
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+/* ---------- Custom cursor ---------- */
+if (finePointer) {
+  document.body.classList.add("has-cursor");
+  const ring = document.getElementById("cursorRing");
+  const dot = document.getElementById("cursorDot");
+  let mx = window.innerWidth / 2,
+    my = window.innerHeight / 2;
+  let rx = mx,
+    ry = my;
+
+  window.addEventListener(
+    "mousemove",
+    (e) => {
+      mx = e.clientX;
+      my = e.clientY;
+      dot.style.left = mx + "px";
+      dot.style.top = my + "px";
+    },
+    { passive: true }
+  );
+
+  const tick = () => {
+    rx += (mx - rx) * 0.18;
+    ry += (my - ry) * 0.18;
+    ring.style.left = rx + "px";
+    ring.style.top = ry + "px";
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  document.querySelectorAll("a, button, .proj, .skill-chips span").forEach((el) => {
+    el.addEventListener("mouseenter", () => ring.classList.add("hover"));
+    el.addEventListener("mouseleave", () => ring.classList.remove("hover"));
+  });
+}
+
+/* ---------- Flight progress rail ---------- */
+const railMarker = document.getElementById("railMarker");
+const railFl = document.getElementById("railFl");
+if (railMarker) {
+  const updateRail = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollable > 0 ? Math.min(1, Math.max(0, window.scrollY / scrollable)) : 0;
+    const rail = railMarker.parentElement;
+    const railHeight = rail.clientHeight;
+    railMarker.style.top = pct * railHeight + "px";
+    const fl = Math.round(pct * 410);
+    if (railFl) railFl.textContent = "FL" + String(fl).padStart(3, "0");
+  };
+  updateRail();
+  window.addEventListener("scroll", updateRail, { passive: true });
+  window.addEventListener("resize", updateRail);
+}
+
+/* ---------- Self-drawing route line ---------- */
+const routeEl = document.getElementById("routeEl");
+const routeLine = document.getElementById("routeLine");
+const routeSvg = document.getElementById("routeSvg");
+if (routeEl && routeLine && routeSvg) {
+  const sizeRoute = () => {
+    const h = routeEl.scrollHeight;
+    routeSvg.setAttribute("viewBox", `0 0 12 ${h}`);
+    routeSvg.setAttribute("preserveAspectRatio", "none");
+    routeLine.setAttribute("y2", Math.max(0, h - 8));
+    const len = routeLine.getTotalLength ? routeLine.getTotalLength() : h;
+    routeLine.style.strokeDasharray = len;
+    if (!routeEl.classList.contains("in-view")) {
+      routeLine.style.strokeDashoffset = len;
+    }
+  };
+  sizeRoute();
+  window.addEventListener("resize", sizeRoute);
+
+  if ("IntersectionObserver" in window) {
+    const routeObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            routeEl.classList.add("in-view");
+            routeLine.style.strokeDashoffset = "0";
+            routeObserver.disconnect();
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    routeObserver.observe(routeEl);
+  } else {
+    routeEl.classList.add("in-view");
+    routeLine.style.strokeDashoffset = "0";
+  }
+}
+
+/* ---------- Radar mouse parallax ---------- */
+if (!reduceMotion && finePointer) {
+  const radarWrap = document.getElementById("radarWrap");
+  if (radarWrap) {
+    radarWrap.addEventListener("mousemove", (e) => {
+      const r = radarWrap.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      radarWrap.style.setProperty("--ry", px * 16 + "deg");
+      radarWrap.style.setProperty("--rx", py * -16 + "deg");
+    });
+    radarWrap.addEventListener("mouseleave", () => {
+      radarWrap.style.setProperty("--ry", "0deg");
+      radarWrap.style.setProperty("--rx", "0deg");
+    });
+  }
+}
+
+/* ---------- Split-flap status readout ---------- */
+const flapWord = document.getElementById("flapWord");
+if (flapWord) {
+  const words = [
+    "SYSTEM DESIGN",
+    "DISTRIBUTED SYSTEMS",
+    "MICROSERVICES",
+    "CQRS + DDD",
+    "ASP.NET CORE",
+  ];
+  if (!reduceMotion) {
+    let i = 0;
+    setInterval(() => {
+      i = (i + 1) % words.length;
+      flapWord.classList.add("flip");
+      setTimeout(() => {
+        flapWord.textContent = words[i];
+      }, 250);
+      setTimeout(() => {
+        flapWord.classList.remove("flip");
+      }, 500);
+    }, 2600);
+  }
+}
+
+/* ---------- Live clock (Asia/Tehran) ---------- */
+const liveClock = document.getElementById("liveClock");
+if (liveClock) {
+  const fmt = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Tehran",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false,
+  });
+  const tickClock = () => {
+    liveClock.textContent = fmt.format(new Date()) + " IRST";
+  };
+  tickClock();
+  setInterval(tickClock, 1000);
+}
+
+/* ---------- Animated stat counters ---------- */
+const statNums = document.querySelectorAll(".hero-stats .n");
+if (statNums.length && "IntersectionObserver" in window) {
+  const animateStat = (el) => {
+    const target = parseInt(el.dataset.target, 10) || 0;
+    const suffix = el.dataset.suffix || "";
+    if (reduceMotion) {
+      el.textContent = target + suffix;
+      return;
+    }
+    el.textContent = "0" + suffix;
+    const start = performance.now();
+    const dur = 1100;
+    const step = (now) => {
+      const t = Math.min(1, (now - start) / dur);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if (t < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  };
+  const statObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateStat(entry.target);
+          statObserver.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.6 }
+  );
+  statNums.forEach((el) => statObserver.observe(el));
+}
+
+/* ---------- Project card tilt + cursor spotlight ---------- */
+document.querySelectorAll(".proj").forEach((card) => {
+  card.addEventListener("mousemove", (e) => {
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width;
+    const py = (e.clientY - r.top) / r.height;
+    card.style.setProperty("--mx", px * 100 + "%");
+    card.style.setProperty("--my", py * 100 + "%");
+    if (!reduceMotion && finePointer) {
+      const rotY = (px - 0.5) * 8;
+      const rotX = (py - 0.5) * -8;
+      card.style.transform = `perspective(600px) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    }
+  });
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "none";
+  });
+});
+
+/* ---------- Magnetic buttons ---------- */
+if (!reduceMotion && finePointer) {
+  document.querySelectorAll(".btn").forEach((btn) => {
+    btn.style.transition = "transform 0.15s ease-out";
+    btn.addEventListener("mousemove", (e) => {
+      const r = btn.getBoundingClientRect();
+      const px = e.clientX - r.left - r.width / 2;
+      const py = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${px * 0.25}px, ${py * 0.35}px)`;
+    });
+    btn.addEventListener("mouseleave", () => {
+      btn.style.transform = "translate(0, 0)";
+    });
+  });
+}

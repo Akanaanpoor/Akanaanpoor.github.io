@@ -534,20 +534,22 @@ body {
 .route {
   position: relative;
 }
-.route::before {
-  content: "";
+.route-svg {
   position: absolute;
-  left: 5px;
-  top: 8px;
-  bottom: 8px;
-  width: 1px;
-  background: repeating-linear-gradient(
-    to bottom,
-    var(--line-strong) 0,
-    var(--line-strong) 4px,
-    transparent 4px,
-    transparent 9px
-  );
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 100%;
+  overflow: visible;
+}
+#routeLine {
+  stroke: var(--line-strong);
+  stroke-width: 1.5;
+  transition: stroke-dashoffset 1.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.route.in-view #routeLine {
+  stroke: var(--accent);
+  opacity: 0.55;
 }
 .xp {
   position: relative;
@@ -627,7 +629,7 @@ body {
   padding: 28px;
   display: flex;
   flex-direction: column;
-  transition: background-color 0.25s ease;
+  transition: background-color 0.25s ease, transform 0.15s ease-out;
 }
 .proj:hover {
   background: var(--bg-alt);
@@ -816,6 +818,264 @@ footer {
   color: var(--fg-faint);
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* =========================================================
+   Signature interactions
+   ========================================================= */
+
+/* ---------- Custom cursor (fine-pointer desktop only) ---------- */
+body.has-cursor {
+  cursor: none;
+}
+body.has-cursor a,
+body.has-cursor button {
+  cursor: none;
+}
+.cursor-ring,
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 999;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease, width 0.2s ease, height 0.2s ease,
+    border-color 0.2s ease;
+}
+.cursor-ring {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--accent);
+}
+.cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--accent);
+}
+body.has-cursor .cursor-ring,
+body.has-cursor .cursor-dot {
+  opacity: 0.9;
+}
+.cursor-ring.hover {
+  width: 52px;
+  height: 52px;
+  border-color: var(--accent-strong);
+}
+
+/* ---------- Flight progress rail ---------- */
+.flight-rail {
+  position: fixed;
+  left: 22px;
+  top: 100px;
+  bottom: 40px;
+  width: 20px;
+  z-index: 25;
+  display: none;
+}
+@media (min-width: 1180px) {
+  .flight-rail {
+    display: block;
+  }
+}
+.rail-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-strong);
+}
+.rail-marker {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: top 0.08s linear;
+}
+.rail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft), 0 0 10px 2px var(--accent);
+  flex-shrink: 0;
+}
+.rail-fl {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--accent);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Ticker / departure-board marquee ---------- */
+.ticker {
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  background: var(--bg-alt);
+  white-space: nowrap;
+}
+.ticker-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--fg-faint);
+  animation: ticker-scroll 34s linear infinite;
+  width: max-content;
+}
+.ticker-track .dot {
+  color: var(--accent);
+}
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+    overflow-x: auto;
+  }
+}
+
+/* ---------- Split-flap status readout ---------- */
+.flap-readout {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.flap-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--fg-faint);
+  letter-spacing: 0.04em;
+}
+.flap-window {
+  display: inline-block;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: 5px 12px;
+  background: var(--bg-alt);
+  perspective: 300px;
+}
+.flap {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  transform-origin: 50% 50%;
+}
+.flap.flip {
+  animation: flap-flip 0.5s cubic-bezier(0.5, 0, 0.5, 1);
+}
+@keyframes flap-flip {
+  0% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  49% {
+    transform: rotateX(-90deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: rotateX(90deg);
+    opacity: 0.3;
+  }
+  100% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+/* ---------- Live clock ---------- */
+.live-clock {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+@media (max-width: 640px) {
+  .clock-sep,
+  .live-clock {
+    display: none;
+  }
+}
+
+/* ---------- Radar parallax + scanline ---------- */
+.radar {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.radar svg {
+  transition: transform 0.2s ease-out;
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+}
+.radar-scan {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(231, 236, 243, 0.05) 0px,
+    rgba(231, 236, 243, 0.05) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+
+/* ---------- Project card tilt + spotlight ---------- */
+.proj {
+  transform-style: preserve-3d;
+  will-change: transform;
+  position: relative;
+}
+.proj::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    280px circle at var(--mx, 50%) var(--my, 50%),
+    var(--accent-soft),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.proj:hover::before {
+  opacity: 1;
+}
+
+/* ---------- Magnetic buttons ---------- */
+.btn {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .radar svg {
+    transform: none !important;
+  }
+  .flap.flip {
+    animation: none;
+  }
 }
 
 /* Reveal-on-load for hero only (single orchestrated moment) */

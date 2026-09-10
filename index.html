@@ -22,6 +22,19 @@
 </head>
 <body>
 
+<!-- Custom cursor (desktop / fine-pointer only, added via JS) -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- Fixed scroll-synced flight progress rail (desktop only) -->
+<div class="flight-rail" aria-hidden="true">
+  <div class="rail-track"></div>
+  <div class="rail-marker" id="railMarker">
+    <span class="rail-dot"></span>
+    <span class="rail-fl" id="railFl">FL000</span>
+  </div>
+</div>
+
 <!-- ============ NAV ============ -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
@@ -61,12 +74,19 @@
           <span class="sep">·</span>
           <span class="pulse-dot"></span>
           <span>Open to new opportunities</span>
+          <span class="sep clock-sep">·</span>
+          <span class="live-clock" id="liveClock">--:--:-- IRST</span>
         </div>
 
         <h1 class="load-in" style="animation-delay:.1s">
           Aref Kanaanpour
           <span class="role">Senior .NET Developer — Systems &amp; Distributed Architecture</span>
         </h1>
+
+        <div class="flap-readout load-in" style="animation-delay:.14s">
+          <span class="flap-label">FOCUS //</span>
+          <span class="flap-window"><span class="flap" id="flapWord">SYSTEM DESIGN</span></span>
+        </div>
 
         <p class="hero-lede load-in" style="animation-delay:.18s">
           I design and build distributed backend systems in C# and ASP.NET Core. My work sits where system
@@ -80,13 +100,14 @@
         </div>
 
         <div class="hero-stats load-in" style="animation-delay:.34s">
-          <div class="stat"><span class="n">5+</span><span>Years in software engineering</span></div>
-          <div class="stat"><span class="n">4</span><span>Years building aviation systems</span></div>
-          <div class="stat"><span class="n">9+</span><span>Public repositories</span></div>
+          <div class="stat"><span class="n" data-target="5" data-suffix="+">5+</span><span>Years in software engineering</span></div>
+          <div class="stat"><span class="n" data-target="4" data-suffix="">4</span><span>Years building aviation systems</span></div>
+          <div class="stat"><span class="n" data-target="9" data-suffix="+">9+</span><span>Public repositories</span></div>
         </div>
       </div>
 
-      <div class="radar load-in" style="animation-delay:.2s" aria-hidden="true">
+      <div class="radar load-in" style="animation-delay:.2s" id="radarWrap" aria-hidden="true">
+        <div class="radar-scan"></div>
         <svg viewBox="0 0 340 340">
           <circle class="radar-ring" cx="170" cy="170" r="150" />
           <circle class="radar-ring" cx="170" cy="170" r="105" />
@@ -115,6 +136,27 @@
   </div>
 </header>
 
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>DOMAIN-DRIVEN DESIGN</span><span class="dot">•</span>
+    <span>CQRS</span><span class="dot">•</span>
+    <span>MICROSERVICES</span><span class="dot">•</span>
+    <span>DISTRIBUTED SYSTEMS</span><span class="dot">•</span>
+    <span>ASP.NET CORE</span><span class="dot">•</span>
+    <span>SYSTEM DESIGN</span><span class="dot">•</span>
+    <span>EVENT-DRIVEN ARCHITECTURE</span><span class="dot">•</span>
+    <span>CLEAN ARCHITECTURE</span><span class="dot">•</span>
+    <span>DOMAIN-DRIVEN DESIGN</span><span class="dot">•</span>
+    <span>CQRS</span><span class="dot">•</span>
+    <span>MICROSERVICES</span><span class="dot">•</span>
+    <span>DISTRIBUTED SYSTEMS</span><span class="dot">•</span>
+    <span>ASP.NET CORE</span><span class="dot">•</span>
+    <span>SYSTEM DESIGN</span><span class="dot">•</span>
+    <span>EVENT-DRIVEN ARCHITECTURE</span><span class="dot">•</span>
+    <span>CLEAN ARCHITECTURE</span><span class="dot">•</span>
+  </div>
+</div>
+
 <main>
 
 <!-- ============ EXPERIENCE ============ -->
@@ -128,7 +170,10 @@
       <span class="tag">5 roles · 2016 – present</span>
     </div>
 
-    <div class="route">
+    <div class="route" id="routeEl">
+      <svg class="route-svg" id="routeSvg" aria-hidden="true">
+        <line id="routeLine" x1="6" y1="8" x2="6" y2="100" />
+      </svg>
 
       <article class="xp current">
         <div class="xp-when">2022 — Present</div>
