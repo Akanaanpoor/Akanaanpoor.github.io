@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aref Kanaanpour — Senior .NET Developer</title>
+<meta name="description" content="Aref Kanaanpour — Senior .NET Developer specializing in system design and distributed architecture. 5+ years building scalable backend systems in C#, ASP.NET Core and microservices." />
+<meta name="theme-color" content="#0a0e16" />
+
+<!-- Open Graph -->
+<meta property="og:title" content="Aref Kanaanpour — Senior .NET Developer" />
+<meta property="og:description" content="Senior .NET Developer specializing in system design and distributed architecture." />
+<meta property="og:type" content="website" />
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230a0e16'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='14' fill='%234fd8c4' text-anchor='middle'%3EAK%3C/text%3E%3C/svg%3E" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#top" class="nav-mark"><span class="box">AK</span> Aref Kanaanpour</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about" data-nav>About</a></li>
+      <li><a href="#experience" data-nav>Experience</a></li>
+      <li><a href="#work" data-nav>Work</a></li>
+      <li><a href="#skills" data-nav>Skills</a></li>
+      <li><a href="#contact" data-nav>Contact</a></li>
+    </ul>
+    <div class="nav-status">
+      <span class="pulse-dot"></span> Open to opportunities
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+    </button>
+  </div>
+  <div class="nav-mobile" id="navMobile">
+    <a href="#about">About</a>
+    <a href="#experience">Experience</a>
+    <a href="#work">Work</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="top">
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div id="about">
+        <div class="hero-meta-row load-in" style="animation-delay:.05s">
+          <span>Karaj, Iran</span>
+          <span class="sep">·</span>
+          <span>35.84°N 50.94°E</span>
+          <span class="sep">·</span>
+          <span class="pulse-dot"></span>
+          <span>Open to new opportunities</span>
+        </div>
+
+        <h1 class="load-in" style="animation-delay:.1s">
+          Aref Kanaanpour
+          <span class="role">Senior .NET Developer — Systems &amp; Distributed Architecture</span>
+        </h1>
+
+        <p class="hero-lede load-in" style="animation-delay:.18s">
+          I design and build distributed backend systems in C# and ASP.NET Core. My work sits where system
+          design meets hands-on delivery — turning operational problems into services built on Domain-Driven
+          Design, CQRS and microservices, and keeping them reliable once they're live.
+        </p>
+
+        <div class="hero-cta load-in" style="animation-delay:.26s">
+          <a href="#experience" class="btn btn-primary">View experience</a>
+          <a href="mailto:aref.kanaanpoor@gmail.com" class="btn btn-ghost">Email me</a>
+        </div>
+
+        <div class="hero-stats load-in" style="animation-delay:.34s">
+          <div class="stat"><span class="n">5+</span><span>Years in software engineering</span></div>
+          <div class="stat"><span class="n">4</span><span>Years building aviation systems</span></div>
+          <div class="stat"><span class="n">9+</span><span>Public repositories</span></div>
+        </div>
+      </div>
+
+      <div class="radar load-in" style="animation-delay:.2s" aria-hidden="true">
+        <svg viewBox="0 0 340 340">
+          <circle class="radar-ring" cx="170" cy="170" r="150" />
+          <circle class="radar-ring" cx="170" cy="170" r="105" />
+          <circle class="radar-ring" cx="170" cy="170" r="60" />
+          <line class="radar-cross" x1="20" y1="170" x2="320" y2="170" />
+          <line class="radar-cross" x1="170" y1="20" x2="170" y2="320" />
+          <g class="radar-sweep">
+            <path d="M170 170 L170 20 A150 150 0 0 1 245 45 Z" fill="url(#sweepGrad)" />
+            <animateTransform id="sweepAnim" attributeName="transform" type="rotate"
+              from="0 170 170" to="360 170 170" dur="7s" repeatCount="indefinite" />
+          </g>
+          <defs>
+            <linearGradient id="sweepGrad" x1="170" y1="20" x2="245" y2="45" gradientUnits="userSpaceOnUse">
+              <stop offset="0" stop-color="#4fd8c4" stop-opacity="0.45" />
+              <stop offset="1" stop-color="#4fd8c4" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <circle class="radar-blip" cx="230" cy="120" r="4" style="animation-delay:.4s" />
+          <circle class="radar-blip" cx="120" cy="235" r="3" style="animation-delay:1.4s" />
+          <circle class="radar-blip" cx="255" cy="220" r="3" style="animation-delay:2.1s" />
+        </svg>
+        <span class="radar-label tl">SYS // ACTIVE</span>
+        <span class="radar-label br">.NET · C# · SQL</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ EXPERIENCE ============ -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Career route</span>
+        <h2>Experience</h2>
+      </div>
+      <span class="tag">5 roles · 2016 – present</span>
+    </div>
+
+    <div class="route">
+
+      <article class="xp current">
+        <div class="xp-when">2022 — Present</div>
+        <h3>Senior .NET Developer</h3>
+        <div class="co"><!-- TODO: add real company name if you'd like it public -->Commercial Airline Company</div>
+        <p class="desc">
+          Own system design and end-to-end technical delivery for core aircraft maintenance and logistics
+          systems — translating operational requirements from engineering and ops teams into scalable .NET
+          services, and staying responsible for how those solutions perform once they're in production.
+        </p>
+        <div class="xp-tags">
+          <span class="tag-chip">System Design</span>
+          <span class="tag-chip">.NET</span>
+          <span class="tag-chip">C#</span>
+          <span class="tag-chip">Microservices</span>
+          <span class="tag-chip">SQL Server</span>
+          <span class="tag-chip">Architecture</span>
+        </div>
+      </article>
+
+      <article class="xp">
+        <div class="xp-when">2021 — 2023</div>
+        <h3>Founder &amp; Software Lead</h3>
+        <div class="co">Hooba Startup Collection · Tehran</div>
+        <p class="desc">
+          Architected a microservices-based data monitoring platform from the ground up, with APIs for
+          ingesting sensor data from field nodes and storing it at scale. Programmed the microcontrollers
+          feeding that data in, then shipped IoT monitoring and control devices for agriculture, livestock
+          and food/pharma storage, plus the web app used to watch and operate them remotely.
+        </p>
+        <div class="xp-tags">
+          <span class="tag-chip">Microservices</span>
+          <span class="tag-chip">IoT</span>
+          <span class="tag-chip">API Design</span>
+          <span class="tag-chip">.NET</span>
+          <span class="tag-chip">Team Leadership</span>
+        </div>
+      </article>
+
+      <article class="xp">
+        <div class="xp-when">Nov 2018 — Feb 2021</div>
+        <h3>IT &amp; Communications Supervisor</h3>
+        <div class="co">Ariana Afraz Barmand Co. · Karaj</div>
+        <p class="desc">
+          Built and ran monitoring software on Onion Architecture, along with the microservices and
+          enterprise APIs connecting it to pharmaceutical partners, the Ministry of Health and the Food
+          &amp; Drug Administration. Also programmed microcontrollers for smart pharma/food-industry
+          devices — data loggers and controllers — as part of the company's R&amp;D team.
+        </p>
+        <div class="xp-tags">
+          <span class="tag-chip">Onion Architecture</span>
+          <span class="tag-chip">Microservices</span>
+          <span class="tag-chip">Enterprise APIs</span>
+          <span class="tag-chip">R&amp;D</span>
+        </div>
+      </article>
+
+      <article class="xp">
+        <div class="xp-when">Apr 2017 — Sep 2018</div>
+        <h3>Web Designer &amp; Developer</h3>
+        <div class="co">Artenos Creative Thinking Co. · Karaj</div>
+        <p class="desc">
+          Backend team member building websites and C# modules, alongside front-end fixes and general
+          site support and standardization work.
+        </p>
+        <div class="xp-tags">
+          <span class="tag-chip">C#</span>
+          <span class="tag-chip">JavaScript</span>
+          <span class="tag-chip">CSS</span>
+          <span class="tag-chip">jQuery</span>
+        </div>
+      </article>
+
+      <article class="xp">
+        <div class="xp-when">Oct 2016 — Feb 2018</div>
+        <h3>Web Designer</h3>
+        <div class="co">Uption Startup Project · Karaj</div>
+        <p class="desc">
+          Internal CMS developer on a small team of Azad University Karaj students, designing and building
+          web modules for the company's CMS and early web applications.
+        </p>
+        <div class="xp-tags">
+          <span class="tag-chip">CMS</span>
+          <span class="tag-chip">Web Development</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section class="section" id="work">
+  <div class="wrap-wide">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Selected work</span>
+        <h2>Projects</h2>
+      </div>
+      <span class="tag">open source · case studies</span>
+    </div>
+
+    <div class="proj-grid">
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>Timex</h3>
+          <span class="yr">Open Source</span>
+        </div>
+        <p>A fully serverless Telegram Mini App for work logging and time tracking, running entirely on
+          Cloudflare Workers and KV.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">Cloudflare Workers · JavaScript</span>
+          <a href="https://github.com/Akanaanpoor/Timex" target="_blank" rel="noopener" class="proj-link">
+            GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>UnitofWork</h3>
+          <span class="yr">Open Source</span>
+        </div>
+        <p>A hands-on implementation of the Unit of Work pattern with a generic repository, built on
+          .NET Core Web API.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">.NET Core · C#</span>
+          <a href="https://github.com/Akanaanpoor/UnitofWork" target="_blank" rel="noopener" class="proj-link">
+            GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>Design Patterns</h3>
+          <span class="yr">Open Source</span>
+        </div>
+        <p>A working reference collection of classic design pattern implementations in C#.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">C# · Design Patterns</span>
+          <a href="https://github.com/Akanaanpoor/Design-patterns" target="_blank" rel="noopener" class="proj-link">
+            GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>Amazon Seller Visibility Platform</h3>
+          <span class="yr">Case Study</span>
+        </div>
+        <p>A web platform for Amazon sellers to improve product discoverability — ad campaigns, discount
+          codes and tailored landing pages designed to move listings up in search results.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">Web · Growth Tooling</span>
+          <span class="proj-link disabled">Client project</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>Smart IoT Monitoring Devices</h3>
+          <span class="yr">Case Study</span>
+        </div>
+        <p>AVR-powered microcontroller devices for industrial IoT — temperature/humidity loggers, warehouse
+          safety alerts and soil-moisture sensors — feeding a .NET monitoring platform.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">AVR · IoT · .NET</span>
+          <span class="proj-link disabled">Client project</span>
+        </div>
+      </div>
+
+      <div class="proj">
+        <div class="proj-top">
+          <h3>Vision-Based Dust Detection</h3>
+          <span class="yr">Case Study</span>
+        </div>
+        <p>A Python image-processing system that flags airborne dust levels from camera feeds for clean-room
+          and pharmaceutical warehouse ventilation control. Shown at Pharmed International Exhibition 2019
+          as a top exhibition idea.</p>
+        <div class="proj-foot">
+          <span class="proj-tags">Python · Image Processing</span>
+          <span class="proj-link disabled">Client project</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Toolset</span>
+        <h2>Skills</h2>
+      </div>
+    </div>
+
+    <div class="skill-groups">
+      <div class="skill-group">
+        <div class="label">Languages</div>
+        <div class="skill-chips">
+          <span>C#</span><span>JavaScript</span><span>Python</span><span>C++</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="label">Frameworks &amp; Libraries</div>
+        <div class="skill-chips">
+          <span>ASP.NET Core</span><span>EF Core</span><span>Dapper</span><span>MediatR</span>
+          <span>SignalR</span><span>Hangfire</span><span>AutoMapper</span><span>Blazor</span><span>jQuery</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="label">Architecture &amp; System Design</div>
+        <div class="skill-chips">
+          <span>Domain-Driven Design</span><span>CQRS</span><span>Microservices</span>
+          <span>Onion Architecture</span><span>Clean Architecture</span><span>Vertical Slice Architecture</span>
+          <span>SOLID</span><span>Design Patterns</span><span>System Design</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="label">Data &amp; Messaging</div>
+        <div class="skill-chips">
+          <span>SQL Server</span><span>PostgreSQL</span><span>Redis</span><span>RabbitMQ</span><span>Caching</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="label">Engineering Practices</div>
+        <div class="skill-chips">
+          <span>Unit &amp; Integration Testing</span><span>CI/CD</span><span>Dependency Injection</span>
+          <span>Structured Logging</span><span>Observability</span><span>REST API Design</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="label">Tools &amp; Platforms</div>
+        <div class="skill-chips">
+          <span>Docker</span><span>Git</span><span>Cloudflare Workers</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EDUCATION ============ -->
+<section class="section" id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-kicker">Background</span>
+        <h2>Education</h2>
+      </div>
+    </div>
+
+    <div class="edu-row">
+      <div>
+        <h3>B.Sc. in Computer Engineering</h3>
+        <div class="deg">Software Engineering<!-- TODO: add university name and years --></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section contact" id="contact">
+  <div class="wrap">
+    <span class="section-kicker">Get in touch</span>
+    <h2>Let's build something reliable together.</h2>
+    <p class="contact-lede">
+      Open to senior backend and system design roles, as well as focused consulting on distributed .NET
+      systems. The fastest way to reach me is email.
+    </p>
+
+    <div class="contact-links">
+      <a href="mailto:aref.kanaanpoor@gmail.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        aref.kanaanpoor@gmail.com
+      </a>
+      <a href="https://github.com/Akanaanpoor" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18l-6-6 6-6M15 6l6 6-6 6"/></svg>
+        github.com/Akanaanpoor
+      </a>
+      <a href="https://ir.linkedin.com/in/arefkanaanpour" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="3"/><text x="12" y="16" font-size="9" text-anchor="middle" fill="currentColor" stroke="none" font-family="sans-serif">in</text></svg>
+        linkedin.com/in/arefkanaanpour
+      </a>
+      <a href="https://t.me/Arefkp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+        t.me/Arefkp
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="wrap">
+  <span>© <span id="year"></span> Aref Kanaanpour</span>
+  <span>Karaj, Iran · Built by hand</span>
+</footer>
+
+<script src="js/script.js"></script>
+</body>
+</html>
