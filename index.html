@@ -16,7 +16,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
 <link rel="stylesheet" href="style.css" />
 </head>
@@ -81,10 +81,6 @@
     <div class="hero-grid">
       <div id="about">
         <div class="hero-meta-row load-in" style="animation-delay:.05s">
-          <span>Karaj, Iran</span>
-          <span class="sep">·</span>
-          <span>35.84°N 50.94°E</span>
-          <span class="sep">·</span>
           <span class="pulse-dot"></span>
           <span>Open to new opportunities</span>
           <span class="sep clock-sep">·</span>
@@ -139,8 +135,11 @@
             </linearGradient>
           </defs>
           <circle class="radar-blip" cx="230" cy="120" r="4" style="animation-delay:.4s" />
+          <text class="radar-blip-label" x="238" y="117">API</text>
           <circle class="radar-blip" cx="120" cy="235" r="3" style="animation-delay:1.4s" />
+          <text class="radar-blip-label" x="128" y="239">DB</text>
           <circle class="radar-blip" cx="255" cy="220" r="3" style="animation-delay:2.1s" />
+          <text class="radar-blip-label" x="263" y="224">MRO</text>
         </svg>
         <span class="radar-label tl">SYS // ACTIVE</span>
         <span class="radar-label br">.NET · C# · SQL</span>
@@ -202,7 +201,12 @@
           with involvement across domain modeling, application architecture, backend services, database design, API and service
           integrations, security, observability, and production deployment. Participate in architectural and technology
           decisions, evaluate technical trade-offs, and help deliver scalable, maintainable solutions aligned with business
-          requirements and the broader platform strategy.        
+          requirements and the broader platform strategy.
+
+          Retired a legacy maintenance-tracking system in favor of the platform built for this role, and migrated it from
+          .NET 5 to .NET 8. Resolved recurring performance issues on high-volume data services, and delivered the management
+          reporting and procurement/parts-sourcing dashboards now used to plan technical HR resourcing and run purchasing
+          end-to-end.
         </p>
         <div class="xp-tags">
           <span class="tag-chip">System Design</span>
@@ -522,7 +526,7 @@
 
 <footer class="wrap">
   <span>© <span id="year"></span> Aref Kanaanpour</span>
-  <span>Karaj, Iran · Built by hand</span>
+  <span>Hand-coded, no template</span>
 </footer>
 
 <script src="script.js"></script>
