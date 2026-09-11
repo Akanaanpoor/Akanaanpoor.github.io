@@ -25,9 +25,9 @@
   --nav-bg: rgba(10, 14, 22, 0.82);
 
   /* Type */
-  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
-  --font-body: "Inter", "Segoe UI", sans-serif;
-  --font-mono: "JetBrains Mono", "SFMono-Regular", Menlo, monospace;
+  --font-display: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, monospace;
 
   /* Layout */
   --maxw: 880px;
@@ -136,17 +136,14 @@ button {
   outline-offset: 3px;
 }
 
-/* Faint blueprint grid across the whole page */
+/* Faint blueprint grid across the whole page. Kept at the same cell size on
+   mobile on purpose — shrinking it packs the lines closer together and
+   fights with text readability instead of helping it. */
 body {
   background-image: linear-gradient(var(--line) 1px, transparent 1px),
     linear-gradient(90deg, var(--line) 1px, transparent 1px);
   background-size: 64px 64px;
   background-position: center top;
-}
-@media (max-width: 640px) {
-  body {
-    background-size: 40px 40px;
-  }
 }
 
 .wrap {
@@ -205,13 +202,29 @@ body {
   right: 0;
   z-index: 40;
   border-bottom: 1px solid transparent;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  transition: border-color 0.3s ease;
+}
+/* The scrolled background/blur lives on this pseudo-element rather than on
+   .nav itself. backdrop-filter on .nav directly would turn it into the
+   containing block for its position:fixed descendants (the mobile menu
+   below), which breaks the mobile menu's full-viewport sizing once you've
+   scrolled. Keeping .nav filter-free avoids that trap. */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 .nav.scrolled {
+  border-bottom-color: var(--line);
+}
+.nav.scrolled::before {
   background: var(--nav-bg);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border-bottom-color: var(--line);
+  opacity: 1;
 }
 .nav-inner {
   max-width: var(--maxw-wide);
@@ -580,6 +593,12 @@ body {
   right: 0;
   text-align: right;
 }
+.radar-blip-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.03em;
+  fill: var(--fg-faint);
+}
 
 @media (max-width: 900px) {
   .hero-grid {
@@ -691,6 +710,7 @@ body {
   font-family: var(--font-mono);
   font-size: 12px;
   color: var(--fg-dim);
+  background: var(--bg-alt);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   padding: 4px 9px;
@@ -792,6 +812,7 @@ body {
 .skill-chips span {
   font-size: 13.5px;
   color: var(--fg-dim);
+  background: var(--bg-alt);
   border: 1px solid var(--line-strong);
   border-radius: var(--radius);
   padding: 6px 11px;
