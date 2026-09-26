@@ -15,11 +15,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
   while (hotIndexes.size < hotCount) {
     hotIndexes.add(Math.floor(Math.random() * total));
   }
+  const amberIndex = [...hotIndexes][Math.floor(Math.random() * hotIndexes.size)];
   const bits = [];
   for (let i = 0; i < total; i++) {
     const span = document.createElement("span");
     const isHot = hotIndexes.has(i);
-    span.className = isHot ? "bit bit-hot" : "bit";
+    span.className = isHot ? (i === amberIndex ? "bit bit-hot amber" : "bit bit-hot") : "bit";
     span.textContent = Math.random() > 0.5 ? "1" : "0";
     if (isHot) span.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
     grid.appendChild(span);
