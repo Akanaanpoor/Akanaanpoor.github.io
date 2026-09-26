@@ -105,6 +105,10 @@
 
         <div class="hero-cta load-in" style="animation-delay:.26s">
           <a href="#experience" class="btn btn-primary">View experience</a>
+          <a href="Aref-Kanaanpour-Resume.pdf" download class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="16" height="16"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+            Download résumé
+          </a>
           <a href="mailto:aref.kanaanpoor@gmail.com" class="btn btn-ghost">Email me</a>
         </div>
 
@@ -115,34 +119,11 @@
         </div>
       </div>
 
-      <div class="radar load-in" style="animation-delay:.2s" id="radarWrap" aria-hidden="true">
-        <div class="radar-scan"></div>
-        <svg viewBox="0 0 340 340">
-          <circle class="radar-ring" cx="170" cy="170" r="150" />
-          <circle class="radar-ring" cx="170" cy="170" r="105" />
-          <circle class="radar-ring" cx="170" cy="170" r="60" />
-          <line class="radar-cross" x1="20" y1="170" x2="320" y2="170" />
-          <line class="radar-cross" x1="170" y1="20" x2="170" y2="320" />
-          <g class="radar-sweep">
-            <path d="M170 170 L170 20 A150 150 0 0 1 245 45 Z" fill="url(#sweepGrad)" />
-            <animateTransform id="sweepAnim" attributeName="transform" type="rotate"
-              from="0 170 170" to="360 170 170" dur="7s" repeatCount="indefinite" />
-          </g>
-          <defs>
-            <linearGradient id="sweepGrad" x1="170" y1="20" x2="245" y2="45" gradientUnits="userSpaceOnUse">
-              <stop offset="0" stop-color="#4fd8c4" stop-opacity="0.45" />
-              <stop offset="1" stop-color="#4fd8c4" stop-opacity="0" />
-            </linearGradient>
-          </defs>
-          <circle class="radar-blip" cx="230" cy="120" r="4" style="animation-delay:.4s" />
-          <text class="radar-blip-label" x="238" y="117">API</text>
-          <circle class="radar-blip" cx="120" cy="235" r="3" style="animation-delay:1.4s" />
-          <text class="radar-blip-label" x="128" y="239">DB</text>
-          <circle class="radar-blip" cx="255" cy="220" r="3" style="animation-delay:2.1s" />
-          <text class="radar-blip-label" x="263" y="224">MRO</text>
-        </svg>
-        <span class="radar-label tl">SYS // ACTIVE</span>
-        <span class="radar-label br">.NET · C# · SQL</span>
+      <div class="codeviz load-in" style="animation-delay:.2s" id="codeWrap" aria-hidden="true">
+        <div class="codeviz-scan"></div>
+        <div class="codeviz-grid" id="codeGrid"></div>
+        <span class="codeviz-label tl">SYS // COMPILED</span>
+        <span class="codeviz-label br">.NET · C# · SQL</span>
       </div>
     </div>
   </div>
