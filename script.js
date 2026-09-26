@@ -7,10 +7,11 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const grid = document.getElementById("codeGrid");
   if (!grid) return;
   const reduceMotionForBits = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isCompact = window.matchMedia("(max-width: 900px)").matches;
   const cols = 12;
-  const rows = 9;
+  const rows = isCompact ? 6 : 9;
   const total = cols * rows;
-  const hotCount = 6;
+  const hotCount = isCompact ? 4 : 6;
   const hotIndexes = new Set();
   while (hotIndexes.size < hotCount) {
     hotIndexes.add(Math.floor(Math.random() * total));
