@@ -1,12 +1,38 @@
 // Footer year
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Respect reduced-motion for the SVG radar sweep (native SMIL animations
-// aren't paused by the CSS prefers-reduced-motion override above)
-if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-  const sweepAnim = document.getElementById("sweepAnim");
-  if (sweepAnim) sweepAnim.setAttribute("repeatCount", "0");
-}
+// Binary code readout (hero graphic): populate a grid of 0/1 digits,
+// light a few up as "hot" bits, and keep flipping random bits over time.
+(() => {
+  const grid = document.getElementById("codeGrid");
+  if (!grid) return;
+  const reduceMotionForBits = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const cols = 12;
+  const rows = 9;
+  const total = cols * rows;
+  const hotCount = 6;
+  const hotIndexes = new Set();
+  while (hotIndexes.size < hotCount) {
+    hotIndexes.add(Math.floor(Math.random() * total));
+  }
+  const bits = [];
+  for (let i = 0; i < total; i++) {
+    const span = document.createElement("span");
+    const isHot = hotIndexes.has(i);
+    span.className = isHot ? "bit bit-hot" : "bit";
+    span.textContent = Math.random() > 0.5 ? "1" : "0";
+    if (isHot) span.style.animationDelay = `${(Math.random() * 3).toFixed(2)}s`;
+    grid.appendChild(span);
+    bits.push(span);
+  }
+  if (!reduceMotionForBits) {
+    setInterval(() => {
+      const idx = Math.floor(Math.random() * total);
+      const span = bits[idx];
+      span.textContent = span.textContent === "1" ? "0" : "1";
+    }, 400);
+  }
+})();
 
 // Nav background on scroll
 const nav = document.getElementById("nav");
@@ -155,20 +181,20 @@ if (routeEl && routeLine && routeSvg) {
   }
 }
 
-/* ---------- Radar mouse parallax ---------- */
+/* ---------- Code panel mouse parallax ---------- */
 if (!reduceMotion && finePointer) {
-  const radarWrap = document.getElementById("radarWrap");
-  if (radarWrap) {
-    radarWrap.addEventListener("mousemove", (e) => {
-      const r = radarWrap.getBoundingClientRect();
+  const codeWrap = document.getElementById("codeWrap");
+  if (codeWrap) {
+    codeWrap.addEventListener("mousemove", (e) => {
+      const r = codeWrap.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width - 0.5;
       const py = (e.clientY - r.top) / r.height - 0.5;
-      radarWrap.style.setProperty("--ry", px * 16 + "deg");
-      radarWrap.style.setProperty("--rx", py * -16 + "deg");
+      codeWrap.style.setProperty("--ry", px * 16 + "deg");
+      codeWrap.style.setProperty("--rx", py * -16 + "deg");
     });
-    radarWrap.addEventListener("mouseleave", () => {
-      radarWrap.style.setProperty("--ry", "0deg");
-      radarWrap.style.setProperty("--rx", "0deg");
+    codeWrap.addEventListener("mouseleave", () => {
+      codeWrap.style.setProperty("--ry", "0deg");
+      codeWrap.style.setProperty("--rx", "0deg");
     });
   }
 }

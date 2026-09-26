@@ -2,10 +2,11 @@
    Aref Kanaanpour — Portfolio
    Design concept: "Flight Systems" — a systems-design engineer
    who currently builds software for aviation maintenance &
-   logistics. The visual language borrows from radar displays,
-   flight routes and instrument panels: a dark navy "night sky"
-   canvas, one signal-teal accent, a faint blueprint grid, and a
-   route-line timeline instead of generic cards everywhere.
+   logistics. The visual language borrows from flight routes,
+   instrument panels and a binary code readout: a dark navy
+   "night sky" canvas, one signal-teal accent, a faint blueprint
+   grid, and a route-line timeline instead of generic cards
+   everywhere.
    ========================================================= */
 
 :root {
@@ -543,68 +544,72 @@ body {
   margin-top: 4px;
 }
 
-/* Radar / route graphic */
-.radar {
+/* Binary / code graphic */
+.codeviz {
   position: relative;
   width: 100%;
   aspect-ratio: 1 / 1;
   max-width: 340px;
   margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 34px 20px 20px;
+  box-sizing: border-box;
 }
-.radar svg {
+.codeviz-grid {
   width: 100%;
   height: 100%;
-  overflow: visible;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-content: center;
+  justify-content: center;
+  gap: 4px 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+  overflow: hidden;
 }
-.radar-ring {
-  fill: none;
-  stroke: var(--line-strong);
-  stroke-width: 1;
+.bit {
+  color: var(--fg-faint);
+  text-align: center;
+  opacity: 0.55;
 }
-.radar-cross {
-  stroke: var(--line-strong);
-  stroke-width: 1;
-}
-.radar-blip {
-  fill: var(--accent);
+.bit-hot {
+  color: var(--accent);
+  opacity: 1;
   animation: blip 3.2s ease-in-out infinite;
 }
 @keyframes blip {
   0%,
   100% {
-    opacity: 0.25;
+    opacity: 0.35;
   }
   50% {
     opacity: 1;
   }
 }
-.radar-label {
+.codeviz-label {
   position: absolute;
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--fg-faint);
 }
-.radar-label.tl {
-  top: 0;
-  left: 0;
+.codeviz-label.tl {
+  top: 12px;
+  left: 18px;
 }
-.radar-label.br {
-  bottom: 0;
-  right: 0;
+.codeviz-label.br {
+  bottom: 12px;
+  right: 18px;
   text-align: right;
-}
-.radar-blip-label {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  letter-spacing: 0.03em;
-  fill: var(--fg-faint);
 }
 
 @media (max-width: 900px) {
   .hero-grid {
     grid-template-columns: 1fr;
   }
-  .radar {
+  .codeviz {
     max-width: 220px;
     margin-top: 40px;
     opacity: 0.8;
@@ -1118,19 +1123,17 @@ body.has-cursor .cursor-dot {
   }
 }
 
-/* ---------- Radar parallax + scanline ---------- */
-.radar {
+/* ---------- Code panel parallax + scanline ---------- */
+.codeviz {
   transform-style: preserve-3d;
   will-change: transform;
-}
-.radar svg {
   transition: transform 0.2s ease-out;
   transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
 }
-.radar-scan {
+.codeviz-scan {
   position: absolute;
   inset: 8%;
-  border-radius: 50%;
+  border-radius: 10px;
   pointer-events: none;
   background: repeating-linear-gradient(
     to bottom,
@@ -1205,7 +1208,7 @@ body.has-cursor .cursor-dot {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .radar svg {
+  .codeviz {
     transform: none !important;
   }
   .flap.flip {
